@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הצעת מחיר פרימיום - פופו דיגיטל</title>
+    
+    <!-- ייבוא פונטים יוקרתיים מ-Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* צבעי פרימיום - 2050 */
+            --bg-dark: #050507;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --brand-red: #E31B23;
+            --brand-red-glow: rgba(227, 27, 35, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #a0a0ab;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-red: rgba(227, 27, 35, 0.3);
+            
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Heebo', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(227, 27, 35, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(227, 27, 35, 0.05), transparent 25%);
+        }
+
+        /* אפקטים של תאורת אווירה עתידנית */
+        .ambient-light {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(150px);
+            z-index: -1;
+            pointer-events: none;
+            animation: pulse 10s infinite alternate;
+        }
+        .light-top { top: -20%; right: -10%; width: 50vw; height: 50vw; background: rgba(227, 27, 35, 0.15); }
+        .light-bottom { bottom: -20%; left: -10%; width: 60vw; height: 60vw; background: rgba(227, 27, 35, 0.1); }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--brand-red); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* אזור פתיחה קולנועי */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 100px 0 50px;
+            position: relative;
+        }
+
+        .hero-top-bar {
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 60px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+        }
+
+        .presenter-badge {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 8px 25px 8px 8px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .presenter-badge img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--brand-red);
+        }
+
+        .presenter-info {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+
+        .presenter-info strong { font-size: 16px; letter-spacing: 0.5px; }
+        .presenter-info span { font-size: 13px; color: var(--text-muted); }
+
+        .client-tag {
+            display: inline-block;
+            background: rgba(227, 27, 35, 0.1);
+            border: 1px solid var(--border-red);
+            color: #ff4d54;
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #A0A0AB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: var(--brand-red);
+            -webkit-text-fill-color: var(--brand-red);
+            text-shadow: 0 0 40px var(--brand-red-glow);
+            position: relative;
+        }
+
+        .hero-desc {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* כרטיסיות מידע בסגנון זכוכית עתידנית */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 100px 0 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--brand-red);
+            border-radius: 2px;
+            box-shadow: 0 0 15px var(--brand-red-glow);
+        }
+
+        .steps-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--brand-red);
+            opacity: 0;
+            transition: var(--transition);
+            box-shadow: 0 0 20px var(--brand-red-glow);
+        }
+
+        .glass-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .glass-card:hover::before { opacity: 1; }
+
+        .step-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.05);
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            line-height: 0.8;
+            min-width: 80px;
+            font-family: monospace;
+        }
+
+        .glass-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        .glass-card ul {
+            list-style: none;
+        }
+
+        .glass-card li {
+            position: relative;
+            padding-right: 30px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .glass-card li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--brand-red);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--brand-red);
+        }
+
+        .glass-card li strong { color: #fff; font-weight: 600; }
+
+        .card-with-mascot {
+            display: grid;
+            grid-template-columns: 1fr 250px;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .mascot-img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
+            transition: var(--transition);
+        }
+
+        .glass-card:hover .mascot-img {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        /* קוביית מחיר - קולנועית */
+        .pricing-hero {
+            background: linear-gradient(135deg, rgba(227, 27, 35, 0.1) 0%, rgba(0,0,0,0.8) 100%);
+            border: 1px solid var(--border-red);
+            border-radius: 30px;
+            padding: 60px;
+            margin: 80px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 50px rgba(227, 27, 35, 0.05);
+        }
+
+        .pricing-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .price-display {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--brand-red);
+            line-height: 1;
+            text-shadow: 0 0 30px var(--brand-red-glow);
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .price-display span {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .trophy-mascot {
+            height: 350px;
+            margin-top: -100px;
+            margin-bottom: -100px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .bonuses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .bonus-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .bonus-box:hover {
+            background: rgba(227, 27, 35, 0.05);
+            border-color: var(--border-red);
+        }
+
+        .bonus-icon {
+            font-size: 40px;
+            color: var(--brand-red);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px var(--brand-red-glow);
+        }
+
+        .bonus-box h4 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .bonus-box p { color: var(--text-muted); font-size: 1rem; }
+
+        .info-panel {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .info-panel h4 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .info-panel h4 i { color: var(--brand-red); }
+
+        .fab-btn {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            background: var(--brand-red);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 10px 30px var(--brand-red-glow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        .fab-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: #ff2a33;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3.5rem; }
+            .card-with-mascot { grid-template-columns: 1fr; }
+            .mascot-img { max-width: 200px; margin: 0 auto; }
+            .pricing-hero { flex-direction: column; text-align: center; }
+            .trophy-mascot { margin: 30px auto 0; height: 250px; }
+            .glass-card { flex-direction: column; }
+        }
+
+        /* הגדרות הדפסה ל-PDF - הופך את כל האתר השחור ללבן, נקי ומקצועי למסמך חתום */
+        @media print {
+            body { background: #ffffff !important; color: #000000 !important; background-image: none !important; }
+            .ambient-light, .fab-btn { display: none !important; }
+            .hero { min-height: auto; padding: 20px 0 !important; }
+            .hero h1 { background: none; -webkit-text-fill-color: #000; color: #000; text-shadow: none; font-size: 2.5rem; }
+            .hero h1 span { color: var(--brand-red); -webkit-text-fill-color: var(--brand-red); }
+            .hero-desc { color: #333; }
+            .glass-card, .info-panel, .bonus-box { 
+                background: #ffffff !important; 
+                border: 1px solid #ddd !important; 
+                box-shadow: none !important; 
+                backdrop-filter: none !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            .glass-card h3, .glass-card li strong, .info-panel h4, .bonus-box h4 { color: #000 !important; }
+            .glass-card li, .bonus-box p { color: #444 !important; }
+            .step-number { -webkit-text-stroke: 0; color: var(--brand-red) !important; font-size: 2rem; min-width: 40px; }
+            .pricing-hero { background: #f9f9f9 !important; border: 2px solid var(--brand-red) !important; box-shadow: none !important; }
+            .pricing-content h3 { color: #000 !important; }
+            .mascot-img, .trophy-mascot { filter: none !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+            @page { margin: 1cm; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- תאורת אווירה ברקע -->
+    <div class="ambient-light light-top"></div>
+    <div class="ambient-light light-bottom"></div>
+
+    <button class="fab-btn" onclick="window.print()">
+        <i class="fas fa-file-pdf"></i> שמור כ-PDF
+    </button>
+
+    <div class="container">
+        
+        <section class="hero reveal">
+            <div class="hero-top-bar">
+                <div class="logo-container">
+                    <!-- ========================================== -->
+                    <!-- הוסף את הקישור ללוגו שלך כאן בתוך ה-src="" -->
+                    <!-- ========================================== -->
+                    <img src="https://drive.google.com/file/d/1Bf4bBoohnVR5O6seQjD-fPq7qdG73b_f/view?usp=drive_link" alt="Popo Digital Logo" onerror="this.src='https://placehold.co/200x60/1D1D1F/FFFFFF?text=POPO+DIGITAL'">
+                </div>
+                
+                <div class="presenter-badge">
+                    <div class="presenter-info">
+                        <strong>מוטי אליהו</strong>
+                        <span>פופו דיגיטל</span>
+                    </div>
+                    <!-- ========================================== -->
+                    <!-- הוסף את הקישור לתמונת הפרזנטור שלך כאן -->
+                    <!-- ========================================== -->
+                    <img src="https://drive.google.com/file/d/1kFb_p23Hq87eVtWoX_gbl1wm4zBT3Oqw/view?usp=drive_link" alt="מוטי אליהו" onerror="this.src='https://placehold.co/100x100/E31B23/FFFFFF?text=ME'">
+                </div>
+            </div>
+
+            <div>
+                <span class="client-tag"><i class="fas fa-lock"></i> מסמך מאובטח עבור: אביטל</span>
+                <h1>אפיון, עיצוב ופיתוח <br><span>אתר חנות וורדפרס</span></h1>
+                <p class="hero-desc">הקמת אתר חנות יוקרתי, רספונסיבי ומניע לפעולה המבוסס על פלטפורמת WordPress ו-Elementor Pro. האתר יתוכנן בעיצוב מותאם אישית ומקורי, תוך דגש על חוויית משתמש חלקה, ניווט קל ואינטואיטיבי בין קטגוריות, ומערכת ניהול חכמה ונוחה שתעניק לך <strong>עצמאות מלאה</strong> בניהול המלאי, המוצרים וההזמנות בעתיד.</p>
+            </div>
+        </section>
+
+        <h2 class="section-title reveal">מה החבילה כוללת?</h2>
+        <div class="steps-grid">
+
+            <div class="glass-card reveal">
+                <div class="step-number">01</div>
+                <div>
+                    <h3>שלב האפיון והתשתית (בניית הבסיס האסטרטגי)</h3>
+                    <ul>
+                        <li><strong>אפיון ומיפוי מקצועי:</strong> בחירת קטגוריות מובילות (עד 7 קטגוריות מובילות, ולכל קטגוריה שתי תתי-קטגוריות). אפיון 3-4 שירותים מובילים (לדוגמה: עמדות צילום, עיצוב שולחנות/שולחנות אוכל, הפקות ימי הולדת, הפקות הפרשות חלה וכו'). כל התשתית תיבנה על בסיס מילות מפתח מיוחדות כדי שהאתר יתחיל להופיע בצורה אורגנית בגוגל ובמנועי הבינה המלאכותית (AI). בניית מבנה האתר (עץ אתר) ליצירת חוויית קנייה נכונה.</li>
+                        <li><strong>הקמת תשתית ובעלות על הנכס:</strong> רכישת שרת אחסון מהיר לאתר (34 ₪ / לחודש + מע"מ, מול חברה צד שלישי. הרכישה תתבצע דרך כרטיס האשראי שלך כדי להבטיח שהאתר והנכס הדיגיטלי יישארו תמיד בבעלותך המלאה).</li>
+                        <li><strong>רישום דומיין:</strong> רכישה ורישום דומיין רשמי באגודת האינטרנט הישראלית (.co.il) בעלות של 85.00 ₪ לשנה בלבד.</li>
+                        <li><strong>רישיון אלמנטור פרו (Elementor Pro):</strong> רכישת רישיון פרימיום רשמי – 150 ₪ לשנה בלבד בתשלום דרכי (במקום כ-372 ₪ בשנה ברכישה עצמאית ישירות מול חברת אלמנטור העולמית).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="glass-card card-with-mascot reveal">
+                <div style="display: flex; gap: 30px; align-items: flex-start;">
+                    <div class="step-number">02</div>
+                    <div>
+                        <h3>עיצוב, פיתוח וחוויית משתמש פרימיום (UI/UX)</h3>
+                        <ul>
+                            <li><strong>דף בית חווייתי:</strong> עיצוב ייחודי, יוקרתי ומזמין המותאם אישית במיוחד לעולמות הבלונים, האירועים והעסק שלך.</li>
+                            <li><strong>עיצוב ארכיונים וקטגוריות:</strong> עיצוב מותאם של עמוד החנות המרכזי, ארכיון הקטגוריות וארכיון תוצאות החיפוש באתר.</li>
+                            <li><strong>עיצוב קוביות מוצר:</strong> עיצוב גרפי אישי וייחודי לקוביות התצוגה של המוצרים, בהתאמה מדויקת לשפה המותגית שלך.</li>
+                            <li><strong>שילוב קוד מותאם אישית (CSS):</strong> שילוב אלמנטים עיצוביים ייחודיים ומערכתיים ברמה הגבוהה ביותר, מבלי להעמיס על מהירות האתר.</li>
+                            <li><strong>רספונסיביות מלאה:</strong> התאמה ורמת גימור מושלמת לכל סוגי מסכי הטלפונים הניידים והמחשבים.</li>
+                            <li><strong>יצירת עמודי האתר המרכזיים:</strong> צור קשר, אודות/קצת עלינו, דף מוצר, עמוד שירות, תקנון אתר, מדיניות פרטיות, מדיניות משלוחים, מדיניות החזרות והחלפות, ועמוד "החשבון שלי" (אזור אישי מאובטח ללקוחות).</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- הוסף את הקישור לתמונת האריה פלוס שקוף כאן -->
+                <!-- ========================================== -->
+                <img src="https://drive.google.com/file/d/1czmReN9s8Iu_37g7_RM1lRXfG-z4PkrY/view?usp=drive_link" alt="Mascot" class="mascot-img" onerror="this.style.display='none'">
+            </div>
+
+            <div class="glass-card reveal">
+                <div class="step-number">03</div>
+                <div>
+                    <h3>מערכת החנות והמכירות המתקדמת (eCommerce)</h3>
+                    <ul>
+                        <li><strong>תשתית WooCommerce מלאה ומאובטחת:</strong> הקמת חוויית רכישה מהירה, קלה וממירה הכוללת עמוד סל קניות, עמוד עגלת קניות נגיש ועמוד תשלום מאובטח ברמה הגבוהה ביותר.</li>
+                        <li><strong>פונקציות מתקדמות ומותאמות למוצרים:</strong> מערכת בחירת כמות משודרגת, הוספת וריאציות חכמות (צבעים, גדלים), ואפשרות מובנית להוספת שמות, הקדשות מיוחדות וטקסט חופשי על גבי המוצרים – פתרון קריטי ויעיל במיוחד עבור מוצרים בעיצוב אישי.</li>
+                        <li><strong>מערכת קופונים והנחות:</strong> תשתית מתקדמת המאפשרת לך להפיק באופן עצמאי קודי הנחה, מבצעים מיוחדים וקופונים קבועים או משתנים לחגים ואירועים.</li>
+                        <li><strong>מערך משלוחים ואיסוף עצמי חכם:</strong> הגדרת אזורי משלוח גיאוגרפיים, עלויות משלוח משתנות ואופציה מובנית לאיסוף עצמי מהעסק (כולל הכנה טכנית לחיבור עתידי לחברת שליחויות חיצונית לבחירתך).</li>
+                        <li><strong>חיבור מערכת סליקה:</strong> אינטגרציה מלאה וחיבור מאובטח לחברת הסליקה הנבחרת שלך.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="glass-card card-with-mascot reveal">
+                <div style="display: flex; gap: 30px; align-items: flex-start;">
+                    <div class="step-number">04</div>
+                    <div>
+                        <h3>שיווק, תוכן ובונוסים מיוחדים (כלול מתנה!)</h3>
+                        <ul>
+                            <li><strong>כתיבת תוכן שיווקי פרימיום מותאם לגוגל:</strong> כתיבת הטקסטים השיווקיים לעמוד האודות ולעמודי השירות/דפי הנחיתה של האתר.</li>
+                            <li><strong>חיבור ואינטגרציה לכלי גוגל:</strong> חיבור מלא ל-Google Analytics ולמנוע החיפוש של גוגל (Search Console) למעקב אחר תנועת הלקוחות.</li>
+                            <li><strong>אופטימיזציה ומהירות מקסימלית:</strong> התקנת מערכות כיווץ ורינדור תמונות מתקדמות לחוויית גלישה מהירה במיוחד, בשילוב מערכת קאש (Cache) חכמה לשמירה על מהירות האתר.</li>
+                            <li><strong>הנגשת אתר בסיסית:</strong> התקנת תוסף נגישות מתקדם וסידור האתר על פי התקנים הנדרשים בחוק.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- הוסף את הקישור לתמונת הפרזנטור עם מגפון כאן -->
+                <!-- ========================================== -->
+                <img src="https://drive.google.com/file/d/1czmReN9s8Iu_37g7_RM1lRXfG-z4PkrY/view?usp=drive_link" alt="Marketing Mascot" class="mascot-img" onerror="this.style.display='none'">
+            </div>
+
+            <div class="glass-card reveal">
+                <div class="step-number">05</div>
+                <div>
+                    <h3>הזנת תוכן, בקרת איכות והכנה לעצמאות</h3>
+                    <ul>
+                        <li><strong>סבבי תיקונים ודיוק:</strong> כדי לוודא שאת מקבלת בדיוק את מה שדמיינת, החבילה כוללת עד 2 סבבי תיקונים מרוכזים לדיוק וליטוש המערכת.</li>
+                        <li><strong>הקמת עמודי שירות לדוגמה:</strong> העלאת 3-4 מהשירותים הנבחרים שלך, כולל כתיבה שיווקית, הזנת תמונות וחשיבה אסטרטגית, כדי להשיק את האתר בצורה הטובה ביותר.</li>
+                        <li><strong>הדרכת היכרות ומסירה (1-on-1):</strong> הדרכה אישית ממוקדת של 20-30 דקות על מערכת הניהול והיכרות עם האתר כדי שתוכלי להתחיל לעבוד. (הדרכה מורחבת ומעמיקה יותר הכוללת ליווי צמוד להזנת עשרות מוצרים וניהול מלאי מורכב, ניתנת להרחבה בתוספת תשלום לפי שעה בהתאם לקצב ההתקדמות שלך).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="glass-card reveal" style="border-left: 4px solid var(--brand-red);">
+                <div class="step-number">06</div>
+                <div>
+                    <h3 style="color: var(--brand-red);">מעטפת ואבטחה משפטית (סטנדרט אתר מסחר בטוח)</h3>
+                    <ul>
+                        <li><strong>הכנה והטמעת עמודי מדיניות:</strong> יצירת עמודים ייעודיים עבור תקנון אתר, מדיניות פרטיות, מדיניות משלוחים ומדיניות החזרות והחלפות.</li>
+                        <li><strong>הגנה משפטית מקיפה:</strong> הטמעת מערכת אישור קוקיז (Cookies) והוספת תיבות אישור מדיניות הפרטיות על גבי טופסי יצירת הקשר באתר, בדיוק כפי שמצוין בחוק, כדי להעניק לך שקט נפשי מלא.</li>
+                        <li><strong>כתיבת:</strong> תקנון אתר, מדיניות פרטיות, מדיניות משלוחים, ומדיניות החזרות והחלפות.</li>
+                    </ul>
+                    <div style="background: rgba(227, 27, 35, 0.1); padding: 15px 20px; border-radius: 10px; border: 1px solid var(--border-red); margin-top: 20px;">
+                        <p style="color: #fff; font-size: 0.95rem; margin: 0;">
+                            <strong><i class="fas fa-shield-alt" style="color: var(--brand-red);"></i> הערה חשובה:</strong> למרות שאני מספק את הניסוחים המקצועיים והמקיפים ביותר המקובלים בשוק, באחריותך הבלעדית להעביר את הטקסטים לבדיקה ואישור סופי של עורך דין מטעמך לפני השקת האתר.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="pricing-hero reveal">
+            <div class="pricing-content">
+                <h3>השקעה בפרויקט</h3>
+                <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 20px;">עבור החבילה המלאה (בנייה, עיצוב ומעטפת משפטית).</p>
+                <div class="price-display">
+                    3,550 <span>₪</span>
+                    <span style="font-size: 1rem; margin-right: 15px; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px;">(חד-פעמי)</span>
+                </div>
+            </div>
+            
+            <!-- ========================================== -->
+            <!-- הוסף את הקישור לתמונת הפרזנטור עם הגביע כאן -->
+            <!-- ========================================== -->
+            <img src="הכנס_כאן_קישור_לפרזנטור_עם_גביע" alt="Victory Mascot" class="trophy-mascot" onerror="this.style.display='none'">
+        </section>
+
+        <h2 class="section-title reveal">הטבות ומבצעים מיוחדים</h2>
+        <div class="bonuses-grid reveal">
+            <div class="bonus-box">
+                <i class="fas fa-paint-brush bonus-icon"></i>
+                <h4>חבילת עיצוב גרפי</h4>
+                <p>יצירת תמונות קטגוריה, עמודי שירות, ובאנר ראשי מותאם למובייל ולמחשב – <strong>מתנה ללא עלות!</strong></p>
+            </div>
+            
+            <div class="bonus-box">
+                <i class="fas fa-gem bonus-icon"></i>
+                <h4>חידוש לוגו ומיתוג</h4>
+                <p>שדרוג ושיוף השפה החזותית של העסק – במקום 1,200 ₪, <strong>רק ב-700 ₪ בלבד</strong>.</p>
+            </div>
+            
+            <div class="bonus-box">
+                <i class="fab fa-google bonus-icon"></i>
+                <h4>פרופיל עסק בגוגל</h4>
+                <p>הקמה מקצועית + אופטימיזציה לקידום (SEO מקומי) – במקום 1,200 ₪, <strong>רק ב-550 ₪ בלבד</strong>.</p>
+            </div>
+            
+            <div class="bonus-box">
+                <i class="fab fa-instagram bonus-icon"></i>
+                <h4>אסטרטגיית אינסטגרם</h4>
+                <p>סידור מחדש והכנת תשתית למימון ופרסום <strong>כ-20% הנחה</strong> (תינתן הצעת מחיר בהמשך).</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 80px;"></div>
+
+        <div class="info-panel reveal">
+            <h4><i class="fas fa-box-open"></i> חבילות העלאת מוצרים (אופציונלי - לחיסכון בזמן)</h4>
+            <p style="color: var(--text-muted); margin-bottom: 20px;"><strong>השירות כולל:</strong> העלאה מסודרת, כתיבת תיאור שיווקי, עיצוב תמונות, הגדרת מחירים ומלאי.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px;">
+                    <strong style="color: var(--brand-red); font-size: 1.1rem; display: block; margin-bottom: 10px;">מוצרים רגילים (ללא וריאציות):</strong>
+                    <ul style="list-style: none; color: #ccc;">
+                        <li style="margin-bottom: 8px;">עד 50 מוצרים: 25 ₪ למוצר</li>
+                        <li>עד 100 מוצרים: 20 ₪ למוצר</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px;">
+                    <strong style="color: var(--brand-red); font-size: 1.1rem; display: block; margin-bottom: 10px;">מוצרים מורכבים (וריאציות, מידות):</strong>
+                    <ul style="list-style: none; color: #ccc;">
+                        <li style="margin-bottom: 8px;">עד 50 מוצרים: 50 ₪ למוצר</li>
+                        <li>עד 100 מוצרים: 35 ₪ למוצר</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 20px; color: #aaa; font-size: 0.9rem;"><em>* הטבה: 10% הנחה על חבילה ראשונה. בשילוב חבילת תחזוקה נשמח להעניק הנחה מוגדלת.</em></p>
+        </div>
+
+        <div class="info-panel reveal" style="border-color: var(--border-red);">
+            <h4><i class="fas fa-file-contract"></i> זמנים ותנאי התקשרות</h4>
+            <ul style="list-style: none; margin-bottom: 30px;">
+                <li style="margin-bottom: 12px; color: #ccc;"><strong style="color: #fff;">הערות להצלחת הפרויקט:</strong> האתר נבנה מאפס על וורדפרס. באחריות הלקוחה לספק חומרי גלם ולהשלים אפיון תוך 48 שעות.</li>
+                <li style="margin-bottom: 12px; color: #ccc;"><strong style="color: #fff;">שותפות ליעדים:</strong> התקדמות השלבים מתוכננת ל-3-4 ימים לשלב. עיכוב מהותי יעצור את ספירת ימי העבודה וידרוש תיאום מחדש למניעת היגררות מעבר ל-14 יום.</li>
+            </ul>
+            
+            <h5 style="color: var(--brand-red); font-size: 1.2rem; margin-bottom: 15px;">תנאי תשלום ואחריות:</h5>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 10px; color: #ccc;"><i class="fas fa-check" style="color: var(--brand-red); margin-left: 10px;"></i><strong>מקדמה:</strong> 60% מראש. יתרה (40%) במסירת האתר.</li>
+                <li style="margin-bottom: 10px; color: #ccc;"><i class="fas fa-check" style="color: var(--brand-red); margin-left: 10px;"></i><strong>זכויות ובעלות:</strong> עוברות אלייך במלואן עם גמר התשלום.</li>
+                <li style="margin-bottom: 10px; color: #ccc;"><i class="fas fa-check" style="color: var(--brand-red); margin-left: 10px;"></i><strong>אחריות:</strong> 6 חודשים על הפיתוח (ללא טעויות אנוש).</li>
+                <li style="color: #ccc;"><i class="fas fa-check" style="color: var(--brand-red); margin-left: 10px;"></i><strong>אספקה:</strong> באוויר עד 14 ימי עסקים לכל היותר.</li>
+            </ul>
+        </div>
+        
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 50px;">שעות פעילות: 10:00 - 18:00</p>
+    </div>
+
+    <script>
+        // אנימציית הופעה חלקה בזמן גלילה
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // הפעלה ראשונית
+    </script>
+</body>
+</html>
