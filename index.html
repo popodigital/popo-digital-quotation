@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="הצעת מחיר מקצועית לבניית אתר חנות WordPress – אביטל | פופו דיגיטל">
+  <title>הצעת מחיר | אביטל × פופו דיגיטל</title>
+  <link rel="icon" href="./images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       AMBIENT BACKGROUND LAYER
+  ════════════════════════════════════════════ -->
+  <div class="ambient" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="scanlines"></div>
+    <canvas id="particleCanvas"></canvas>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       NOISE TEXTURE OVERLAY
+  ════════════════════════════════════════════ -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN WRAPPER
+  ════════════════════════════════════════════ -->
+  <div class="page-wrapper">
+
+    <!-- ─── HERO ──────────────────────────────── -->
+    <header class="hero card reveal" id="hero">
+      <div class="hero__content">
+
+        <div class="hero__brand">
+          <img src="./images/logo.png" alt="פופו דיגיטל לוגו" class="hero__logo">
+          <div class="hero__brand-line"></div>
+        </div>
+
+        <div class="hero__headline">
+          <span class="section-label">
+            <i class="fas fa-bolt"></i>&nbsp;הצעת מחיר בלעדית
+          </span>
+          <h1>
+            אפיון, עיצוב ופיתוח<br>
+            <span class="gradient-text">אתר חנות WordPress</span>
+          </h1>
+        </div>
+
+        <div class="hero__meta">
+          <span class="badge">
+            <i class="fas fa-user-circle"></i>
+            עבור: <strong>אביטל</strong>
+          </span>
+          <span class="badge">
+            <i class="fas fa-store"></i>
+            מאת: <strong>מוטי אליהו – פופו דיגיטל</strong>
+          </span>
+          <span class="badge badge--date">
+            <i class="fas fa-calendar-alt"></i>
+            <strong id="proposal-date"></strong>
+          </span>
+        </div>
+
+        <div class="hero__summary">
+          <h3>
+            <span class="red-text"><i class="fas fa-rocket"></i></span>
+            &nbsp;תקציר הפרויקט – הדרך שלך להצלחה דיגיטלית
+          </h3>
+          <p>
+            הקמת אתר חנות יוקרתי, רספונסיבי ומניע לפעולה המבוסס על פלטפורמת
+            <strong>WordPress ו-Elementor Pro</strong>. האתר יתוכנן בעיצוב מותאם אישית ומקורי,
+            תוך דגש על חוויית משתמש חלקה, ניווט קל ואינטואיטיבי בין קטגוריות, ומערכת ניהול חכמה
+            ונוחה שתעניק לך עצמאות מלאה בניהול המלאי, המוצרים וההזמנות בעתיד.
+          </p>
+        </div>
+
+        <div class="hero__cta-row">
+          <a href="#pricing" class="cta-btn">
+            <i class="fas fa-arrow-left"></i> צפה בהצעה המלאה
+          </a>
+          <div class="trust-badges">
+            <span class="trust-item"><i class="fas fa-shield-alt"></i> 6 חודשי אחריות</span>
+            <span class="trust-item"><i class="fas fa-bolt"></i> 14 ימי עסקים</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="hero__media">
+        <div class="presenter-wrapper">
+          <div class="presenter-glow"></div>
+          <img
+            src="./images/presenter-like.png"
+            alt="מציג אגודל למעלה"
+            class="presenter float"
+            id="heroPresenter"
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- ─── SECTION: WHAT'S INCLUDED ─────────── -->
+    <section class="section" aria-labelledby="included-heading">
+      <div class="section-header reveal">
+        <span class="section-label"><i class="fas fa-layer-group"></i>&nbsp;6 שלבים מקצועיים</span>
+        <h2 id="included-heading">מה החבילה <span class="red-text">כוללת?</span></h2>
+        <p>כל שירות מפורט כדי שתדעי בדיוק מה את מקבלת</p>
+      </div>
+
+      <div class="grid-stages reveal-stagger">
+
+        <!-- Stage 1 -->
+        <div class="card card--stage" data-tilt>
+          <div class="card__num">01</div>
+          <div class="card__header">
+            <div class="stage-icon-wrap">
+              <i class="fas fa-drafting-compass stage-icon"></i>
+            </div>
+            <div>
+              <span class="stage-badge">שלב 1</span>
+              <h3>אפיון והתשתית</h3>
+              <p class="stage-sub">בניית הבסיס האסטרטגי</p>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <strong>אפיון ומיפוי מקצועי:</strong>
+              בחירת קטגוריות מובילות (עד 7 קטגוריות, ולכל קטגוריה שתי תתי-קטגוריות).
+              אפיון 3-4 שירותים מובילים (לדוגמה: עמדות צילום, עיצוב שולחנות, הפקות ימי הולדת, הפרשות חלה וכו').
+              כל התשתית תיבנה על בסיס מילות מפתח מיוחדות כדי שהאתר יתחיל להופיע אורגנית בגוגל ובמנועי ה-AI.
+              בניית מבנה האתר (עץ אתר) ליצירת חוויית קנייה נכונה.
+            </li>
+            <li>
+              <strong>הקמת תשתית ובעלות על הנכס:</strong>
+              רכישת שרת אחסון מהיר לאתר (34 ₪/לחודש + מע"מ, מול חברת צד שלישי).
+              הרכישה תתבצע דרך כרטיס האשראי שלך כדי להבטיח שהאתר והנכס הדיגיטלי יישארו תמיד בבעלותך המלאה.
+            </li>
+            <li>
+              <strong>רישום דומיין:</strong>
+              רכישה ורישום דומיין רשמי באגודת האינטרנט הישראלית (.co.il) בעלות של <strong>85 ₪ לשנה בלבד</strong>.
+            </li>
+            <li>
+              <strong>רישיון Elementor Pro:</strong>
+              רכישת רישיון פרימיום רשמי – <strong>150 ₪ לשנה בלבד</strong> בתשלום דרכי
+              (במקום כ-372 ₪ ברכישה עצמאית ישירות מחברת אלמנטור העולמית).
+            </li>
+          </ul>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="card card--stage" data-tilt>
+          <div class="card__num">02</div>
+          <div class="card__header">
+            <div class="stage-icon-wrap">
+              <i class="fas fa-paint-brush stage-icon"></i>
+            </div>
+            <div>
+              <span class="stage-badge">שלב 2</span>
+              <h3>עיצוב ופיתוח פרימיום</h3>
+              <p class="stage-sub">UI/UX ברמה הגבוהה ביותר</p>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <strong>דף בית חווייתי:</strong>
+              עיצוב ייחודי, יוקרתי ומזמין המותאם אישית לעולמות הבלונים, האירועים והעסק שלך.
+            </li>
+            <li>
+              <strong>עיצוב ארכיונים וקטגוריות:</strong>
+              עיצוב מותאם של עמוד החנות המרכזי, ארכיון הקטגוריות וארכיון תוצאות החיפוש.
+            </li>
+            <li>
+              <strong>עיצוב קוביות מוצר:</strong>
+              עיצוב גרפי אישי וייחודי לקוביות התצוגה של המוצרים, בהתאמה מדויקת לשפה המותגית שלך.
+            </li>
+            <li>
+              <strong>שילוב קוד CSS מותאם אישית:</strong>
+              שילוב אלמנטים עיצוביים ייחודיים ומערכתיים ברמה הגבוהה ביותר, מבלי להעמיס על מהירות האתר.
+            </li>
+            <li>
+              <strong>רספונסיביות מלאה:</strong>
+              התאמה ורמת גימור מושלמת לכל סוגי מסכי הטלפונים הניידים והמחשבים.
+            </li>
+            <li>
+              <strong>יצירת עמודי האתר המרכזיים:</strong>
+              צור קשר, אודות, דף מוצר, עמוד שירות, תקנון, מדיניות פרטיות, מדיניות משלוחים,
+              מדיניות החזרות, ועמוד "החשבון שלי" (אזור אישי מאובטח ללקוחות שלך).
+            </li>
+          </ul>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="card card--stage" data-tilt>
+          <div class="card__num">03</div>
+          <div class="card__header">
+            <div class="stage-icon-wrap">
+              <i class="fas fa-shopping-cart stage-icon"></i>
+            </div>
+            <div>
+              <span class="stage-badge">שלב 3</span>
+              <h3>מערכת החנות המתקדמת</h3>
+              <p class="stage-sub">eCommerce ברמה עולמית</p>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <strong>תשתית WooCommerce מלאה ומאובטחת:</strong>
+              הקמת חוויית רכישה מהירה, קלה וממירה הכוללת עמוד סל קניות, עגלת קניות נגישה
+              ועמוד תשלום מאובטח ברמה הגבוהה ביותר.
+            </li>
+            <li>
+              <strong>פונקציות מתקדמות ומותאמות למוצרים:</strong>
+              מערכת בחירת כמות משודרגת, הוספת וריאציות חכמות (צבעים, גדלים), ואפשרות מובנית
+              להוספת שמות, הקדשות מיוחדות וטקסט חופשי על גבי המוצרים.
+            </li>
+            <li>
+              <strong>מערכת קופונים והנחות:</strong>
+              תשתית מתקדמת המאפשרת לך להפיק באופן עצמאי קודי הנחה, מבצעים מיוחדים וקופונים לחגים ואירועים.
+            </li>
+            <li>
+              <strong>מערך משלוחים ואיסוף עצמי חכם:</strong>
+              הגדרת אזורי משלוח גיאוגרפיים, עלויות משלוח משתנות ואופציה מובנית לאיסוף עצמי
+              (כולל הכנה לחיבור עתידי לחברת שליחויות חיצונית).
+            </li>
+            <li>
+              <strong>חיבור מערכת סליקה:</strong>
+              אינטגרציה מלאה וחיבור מאובטח לחברת הסליקה הנבחרת שלך.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Stage 4 -->
+        <div class="card card--stage card--gift" data-tilt>
+          <div class="card__num">04</div>
+          <div class="ribbon">🎁&nbsp;בונוס!</div>
+          <div class="card__header">
+            <div class="stage-icon-wrap stage-icon-wrap--gold">
+              <i class="fas fa-gift stage-icon stage-icon--gold"></i>
+            </div>
+            <div>
+              <span class="stage-badge stage-badge--gold">שלב 4</span>
+              <h3>שיווק, תוכן ובונוסים</h3>
+              <p class="stage-sub red-text"><i class="fas fa-gift"></i>&nbsp;כלול במחיר כמתנה לעסק!</p>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <strong>כתיבת תוכן שיווקי פרימיום מותאם לגוגל:</strong>
+              כתיבת הטקסטים השיווקיים לעמוד האודות ולעמודי השירות/דפי הנחיתה של האתר.
+            </li>
+            <li>
+              <strong>חיבור ואינטגרציה לכלי גוגל:</strong>
+              חיבור מלא ל-Google Analytics ולמנוע החיפוש של גוגל (Search Console) למעקב אחר תנועת הלקוחות.
+            </li>
+            <li>
+              <strong>אופטימיזציה ומהירות מקסימלית:</strong>
+              התקנת מערכות כיווץ ורינדור תמונות מתקדמות, בשילוב מערכת Cache חכמה לשמירה על מהירות האתר.
+            </li>
+            <li>
+              <strong>הנגשת אתר בסיסית:</strong>
+              התקנת תוסף נגישות מתקדם וסידור האתר על פי התקנים הנדרשים בחוק.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Stage 5 -->
+        <div class="card card--stage" data-tilt>
+          <div class="card__num">05</div>
+          <div class="card__header">
+            <div class="stage-icon-wrap">
+              <i class="fas fa-user-graduate stage-icon"></i>
+            </div>
+            <div>
+              <span class="stage-badge">שלב 5</span>
+              <h3>הזנת תוכן ובקרת איכות</h3>
+              <p class="stage-sub">הכנה לעצמאות מלאה</p>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <strong>סבבי תיקונים ודיוק:</strong>
+              החבילה כוללת <strong>עד 2 סבבי תיקונים מרוכזים</strong> לדיוק וליטוש המערכת לפי רצונך.
+            </li>
+            <li>
+              <strong>הקמת עמודי שירות לדוגמה:</strong>
+              העלאת 3-4 מהשירותים הנבחרים שלך, כולל כתיבה שיווקית, הזנת תמונות וחשיבה אסטרטגית,
+              כדי להשיק את האתר בצורה הטובה ביותר.
+            </li>
+            <li>
+              <strong>הדרכת היכרות ומסירה (1-on-1):</strong>
+              הדרכה אישית ממוקדת של 20-30 דקות על מערכת הניהול כדי שתוכלי להתחיל לעבוד מיד.
+              (הדרכה מורחבת הכוללת ליווי צמוד להזנת עשרות מוצרים ניתנת להרחבה בתוספת תשלום לפי שעה).
+            </li>
+          </ul>
+        </div>
+
+        <!-- Stage 6 -->
+        <div class="card card--stage card--legal" data-tilt>
+          <div class="card__num">06</div>
+          <div class="card__header">
+            <div class="stage-icon-wrap stage-icon-wrap--red">
+              <i class="fas fa-shield-alt stage-icon stage-icon--red"></i>
+            </div>
+            <div>
+              <span class="stage-badge stage-badge--red">שלב 6</span>
+              <h3>מעטפת ואבטחה משפטית</h3>
+              <p class="stage-sub">סטנדרט אתר מסחר בטוח</p>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <strong>הכנה והטמעת עמודי מדיניות:</strong>
+              יצירת עמודים ייעודיים עבור תקנון אתר, מדיניות פרטיות, מדיניות משלוחים
+              ומדיניות החזרות והחלפות.
+            </li>
+          </ul>
+          <div class="alert-box">
+            <p><strong>⚡ תוספת חשובה – קטנה אבל הכרחית!</strong></p>
+            <p style="margin-top:10px">
+              <strong>הגנה משפטית מקיפה:</strong>
+              הטמעת מערכת אישור קוקיז (Cookies) והוספת תיבות אישור מדיניות הפרטיות על גבי
+              טופסי יצירת הקשר, בדיוק כפי שמצוין בחוק, כדי להעניק לך שקט נפשי מלא.
+            </p>
+            <p style="margin-top:10px">
+              <strong>כתיבה מקצועית של:</strong> תקנון אתר, מדיניות פרטיות, מדיניות משלוחים,
+              ומדיניות החזרות והחלפות.
+            </p>
+          </div>
+          <div class="note-box">
+            <small>
+              <i class="fas fa-info-circle"></i>&nbsp;
+              <strong>הערה חשובה:</strong> למרות שאני מספק את הניסוחים המקצועיים והמקיפים ביותר
+              המקובלים בשוק, באחריותך הבלעדית להעביר את הטקסטים לבדיקה ואישור של עורך דין מטעמך
+              לפני השקת האתר.
+            </small>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ─── PRICING ────────────────────────────── -->
+    <section class="pricing-section card card--pricing reveal" id="pricing" aria-labelledby="pricing-heading">
+      <div class="pricing-inner">
+
+        <div class="price-block">
+          <span class="section-label"><i class="fas fa-tag"></i>&nbsp;השקעה בפרויקט</span>
+          <h2 id="pricing-heading">
+            <span class="gradient-text">השקעה חד-פעמית</span><br>עבור החבילה המלאה
+          </h2>
+          <p>בנייה, עיצוב, ואבטחה משפטית – הכול כלול במחיר אחד שקוף</p>
+
+          <div class="price-display">
+            <span class="price-amount">3,550</span>
+            <span class="price-currency">₪</span>
+          </div>
+          <span class="price-note">+ מע"מ | תשלום ב-2 שלבים</span>
+
+          <div class="price-breakdown">
+            <div class="breakdown-item">
+              <i class="fas fa-check-circle"></i>
+              <span><strong>60%</strong> מקדמה להתחלת עבודה – 2,130 ₪</span>
+            </div>
+            <div class="breakdown-item">
+              <i class="fas fa-check-circle"></i>
+              <span><strong>40%</strong> עם מסירת האתר לאוויר – 1,420 ₪</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pricing-media">
+          <div class="trophy-glow"></div>
+          <img
+            src="./images/presenter-trophy.png"
+            alt="מציג גביע"
+            class="trophy-img float"
+          >
+        </div>
+
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ─── UPSELLS & BONUSES ─────────────────── -->
+    <section class="section" aria-labelledby="upsells-heading">
+      <div class="section-header reveal">
+        <span class="section-label"><i class="fas fa-star"></i>&nbsp;שדרוגים אופציונליים</span>
+        <h2 id="upsells-heading">הטבות <span class="red-text">ומבצעים</span></h2>
+        <p>שדרוגים נוספים שייקחו את העסק שלך לשלב הבא</p>
+      </div>
+
+      <div class="grid-upsells reveal-stagger">
+
+        <!-- Bonus: Graphic Design -->
+        <div class="card card--bonus" data-tilt>
+          <div class="ribbon ribbon--gold">🎁&nbsp;מתנה!</div>
+          <div class="upsell-icon">🎨</div>
+          <h3>חבילת עיצוב גרפי</h3>
+          <p>
+            יצירת תמונות קטגוריה, תמונות לעמודי השירות, ויצירת באנר ראשי מעוצב
+            ומותאם אישית לטלפון ולמחשב – <strong>מתנה מלאה ממני ללא עלות נוספת!</strong>
+            (בשווי מאות שקלים)
+          </p>
+          <div class="upsell-prices">
+            <strong style="color: #FFD700; text-shadow: 0 0 20px rgba(255,215,0,0.5);">חינם!</strong>
+            <del>מאות ₪</del>
+          </div>
+        </div>
+
+        <!-- Upsell: Logo & Branding -->
+        <div class="card" data-tilt>
+          <div class="upsell-icon">💎</div>
+          <h3>חידוש לוגו ומיתוג</h3>
+          <p>
+            שדרוג ושיוף השפה החזותית של העסק.
+            תוגש הצעת מחיר מסודרת בנפרד במידת הצורך.
+          </p>
+          <div class="upsell-prices">
+            <strong>700 ₪</strong>
+            <del>1,200 ₪</del>
+            <small class="discount-tag">חיסכון: 500 ₪</small>
+          </div>
+        </div>
+
+        <!-- Upsell: Google Business -->
+        <div class="card" data-tilt>
+          <div class="upsell-icon">🗺️</div>
+          <h3>פרופיל העסק בגוגל</h3>
+          <p>
+            הקמה מקצועית + אופטימיזציה מתקדמת לקידום (SEO מקומי) כדי שלקוחות
+            ימצאו אותך באזור שלך.
+          </p>
+          <div class="upsell-prices">
+            <strong>550 ₪</strong>
+            <del>1,200 ₪</del>
+            <small class="discount-tag">חיסכון: 650 ₪</small>
+          </div>
+        </div>
+
+        <!-- Upsell: Instagram -->
+        <div class="card" data-tilt>
+          <div class="upsell-icon">📸</div>
+          <h3>אסטרטגיית אינסטגרם</h3>
+          <p>
+            סידור מחדש והכנת תשתית למימון ופרסום ממומן.
+          </p>
+          <div class="upsell-prices">
+            <strong>~20% הנחה</strong>
+            <small>(הצעת מחיר תינתן בהמשך)</small>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── PRODUCT UPLOAD PACKAGES ──────────── -->
+    <section class="section" aria-labelledby="products-heading">
+      <div class="card reveal" data-tilt>
+        <div class="card__header">
+          <div class="stage-icon-wrap">
+            <i class="fas fa-boxes stage-icon"></i>
+          </div>
+          <div>
+            <span class="section-label"><i class="fas fa-box-open"></i>&nbsp;שירות אופציונלי</span>
+            <h2 id="products-heading">חבילות העלאת מוצרים</h2>
+            <p>לחסוך לך זמן ועבודה – ולהשיק חנות מוכנה ומזמינה</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 28px;">
+          <h4>מה כולל שירות הזנת המוצרים?</h4>
+          <ul class="feature-list" style="margin-top: 16px; margin-bottom: 36px;">
+            <li>העלאת המוצרים לחנות בצורה מסודרת עם כל המפרטים הטכניים.</li>
+            <li>כתיבת תיאור מוצר מקצועי, שיווקי ומניע לפעולה לכל מוצר.</li>
+            <li>עיצוב והתאמת תמונות המוצרים (כולל חיתוך, תיקון צבעים והוספת אלמנטים גרפיים לפי צורך).</li>
+            <li>הגדרת מחירים, ניהול מלאי, קישור לקטגוריות והגדרת כמויות.</li>
+          </ul>
+
+          <div class="grid-packages">
+            <div class="card" style="padding: 28px;">
+              <div class="upsell-icon" style="font-size: 1.6rem; margin-bottom: 10px;">🏷️</div>
+              <h4>מוצרים רגילים (ללא וריאציות)</h4>
+              <ul class="feature-list" style="margin-top: 14px;">
+                <li>חבילה עד 50 מוצרים: <strong>25 ₪</strong> למוצר</li>
+                <li>חבילה עד 100 מוצרים: <strong>20 ₪</strong> למוצר</li>
+              </ul>
+            </div>
+            <div class="card" style="padding: 28px;">
+              <div class="upsell-icon" style="font-size: 1.6rem; margin-bottom: 10px;">🏷️🏷️</div>
+              <h4>מוצרים מורכבים (צבעים/גדלים)</h4>
+              <ul class="feature-list" style="margin-top: 14px;">
+                <li>חבילה עד 50 מוצרים: <strong>50 ₪</strong> למוצר</li>
+                <li>חבילה עד 100 מוצרים: <strong>35 ₪</strong> למוצר</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="alert-box" style="margin-top: 28px; background: rgba(255,215,0,0.06); border-right-color: #FFD700;">
+            <p>
+              <i class="fas fa-star" style="color: #FFD700;"></i>&nbsp;
+              <strong>הטבה מיוחדת:</strong> 10% הנחה על חבילת המוצרים הראשונה.
+              ובמידה ותבחרי לשלב חבילת תחזוקה חודשית שוטפת או כמות מוצרים גדולה יותר,
+              נשמח לבוא לקראתך ולהעניק הנחה מוגדלת.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ─── TERMS & CONDITIONS ────────────────── -->
+    <section class="section" aria-labelledby="terms-heading">
+      <div class="section-header reveal">
+        <span class="section-label"><i class="fas fa-file-contract"></i>&nbsp;תנאים ולוחות זמנים</span>
+        <h2 id="terms-heading">שקיפות <span class="red-text">מלאה</span></h2>
+        <p>כל מה שצריך לדעת לפני שמתחילים</p>
+      </div>
+
+      <div class="grid-terms reveal-stagger">
+
+        <div class="card">
+          <div class="card__header" style="margin-bottom: 24px;">
+            <div class="stage-icon-wrap">
+              <i class="fas fa-clock stage-icon"></i>
+            </div>
+            <h3>זמנים ותנאי התקשרות</h3>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <strong>הערות להצלחת הפרויקט:</strong>
+              האתר נבנה בצורה מקצועית מאפס (ללא תבניות מוכנות מראש) ויושב על פלטפורמת
+              WordPress המנוהלת באמצעות Elementor Pro.
+            </li>
+            <li>
+              <strong>אספקת חומרים:</strong>
+              כדי שנוכל לעמוד בלוחות הזמנים, באחריות הלקוחה לספק את כל חומרי הגלם
+              (טקסטים, תמונות, סרטונים ומידע) ולהשלים את שלב האפיון המשותף בתוך
+              <strong>48 שעות מקבלתו</strong>.
+            </li>
+            <li>
+              <strong>שותפות לעמידה ביעדים:</strong>
+              התקדמות השלבים מתוכננת לטווח של 3-4 ימים לכל שלב אישור.
+              כל עיכוב מהותי של מעל 3-4 ימים יעצור את ספירת ימי העבודה וידרוש
+              תיאום מחדש של לוחות הזמנים, כדי לשמור על רמת ביצוע גבוהה ולמנוע
+              היגררות מיותרת מעבר ל-14 ימים.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card__header" style="margin-bottom: 24px;">
+            <div class="stage-icon-wrap">
+              <i class="fas fa-handshake stage-icon"></i>
+            </div>
+            <h3>תנאי תשלום ואחריות</h3>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <strong>מקדמה להתחלת עבודה:</strong>
+              תשלום מראש של <strong>60%</strong> מערך ההקמה.
+              (עלויות צד ג' כגון אחסון ודומיין ישולמו ישירות לחברות בנפרד מעלות העבודה).
+            </li>
+            <li>
+              <strong>תשלום סופי:</strong>
+              <strong>40%</strong> הנותרים ישולמו עם מסירת האתר ועמידתו באוויר.
+            </li>
+            <li>
+              <strong>זכויות יוצרים:</strong>
+              עם גמר התשלום, את מקבלת את הבעלות והזכויות המלאות על האתר והקוד שלו.
+            </li>
+            <li>
+              <strong>אחריות טכנית:</strong>
+              האתר מלווה באחריות טכנית מלאה למשך <strong>6 חודשים</strong> על כל רכיבי
+              הפיתוח שבוצעו על ידינו.
+            </li>
+            <li>
+              <strong>זמני אספקה:</strong>
+              האתר יהיה מוכן ויעלה לאוויר בתוך <strong>14 ימי עסקים לכל היותר</strong>.
+              החבילה כוללת שני סבבי תיקונים וסבב דיוק סופי לפני המסירה הרשמית.
+            </li>
+            <li>
+              <strong>שעות פעילות:</strong>
+              10:00 – 18:00 (א'–ה')
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── FOOTER ─────────────────────────────── -->
+    <footer class="site-footer reveal">
+      <div class="footer-inner">
+        <img src="./images/logo.png" alt="פופו דיגיטל לוגו" class="footer-logo">
+        <p>הצעה זו תקפה ל-<strong>14 ימים</strong> ממועד השליחה.</p>
+        <p style="margin-top: 6px;">
+          <strong>מוטי אליהו</strong> — פופו דיגיטל | <a href="mailto:moti@popodigital.co.il">moti@popodigital.co.il</a>
+        </p>
+        <p class="footer-copy">© 2025 Popo Digital. כל הזכויות שמורות.</p>
+      </div>
+    </footer>
+
+  </div><!-- /page-wrapper -->
+
+  <!-- ─── FAB PRINT BUTTON ──────────────────── -->
+  <button class="fab" id="fab-print" title="שמור כ-PDF / הדפס" aria-label="שמור כ-PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="6 9 6 2 18 2 18 9"></polyline>
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+      <rect x="6" y="14" width="12" height="8"></rect>
+    </svg>
+    <span>שמור כ-PDF</span>
+  </button>
+
+  <!-- ─── CURSOR GLOW ────────────────────────── -->
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
