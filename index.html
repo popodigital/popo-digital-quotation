@@ -14,6 +14,40 @@
 </head>
 <body>
 
+<!--  -->
+<div id="password-gate" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; direction: rtl;">
+    <div style="background: #111; border: 1px solid #333; padding: 40px; border-radius: 15px; text-align: center; max-width: 380px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.7);">
+        <img src="https://i.ibb.co/XZpbNPLY/image.png" alt="POPO" style="width: 90px; margin-bottom: 20px; opacity: 0.9;">
+        <h2 style="color: #fff; margin-bottom: 10px; font-size: 1.6rem; font-weight: 600;">הגישה מוגבלת</h2>
+        <p style="color: #777; font-size: 0.95rem; margin-bottom: 25px;">נא להזין סיסמה על מנת לצפות בהצעת המחיר החיה.</p>
+        
+        <input type="password" id="pass-input" placeholder="הקש סיסמה כאן" style="width: 100%; padding: 14px; border-radius: 8px; border: 1px solid #444; background: #1a1a1a; color: #fff; text-align: center; font-size: 1.1rem; box-sizing: border-box; margin-bottom: 15px; outline: none;">
+        <button onclick="checkPassword()" style="width: 100%; padding: 14px; border-radius: 8px; border: none; background: #0070f3; color: #fff; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s;">כניסה למערכת</button>
+        
+        <p id="err-msg" style="color: #ff4444; font-size: 0.9rem; margin-top: 15px; display: none; font-weight: 500;">❌ סיסמה שגויה. הגישה חסומה.</p>
+    </div>
+</div>
+
+<script>
+function checkPassword() {
+    const passwordInput = document.getElementById('pass-input').value;
+    
+    //
+    if (passwordInput === 'Popo2050') {
+        document.getElementById('password-gate').style.display = 'none';
+    } else {
+        const err = document.getElementById('err-msg');
+        err.style.display = 'block';
+        document.getElementById('pass-input').value = '';
+    }
+}
+
+// מאפשר כניסה גם בלחיצה על כפתור Enter במקלדת
+document.getElementById('pass-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') { checkPassword(); }
+});
+</script>
+<!-- סוף מנגנון הנעילה -->
   <!-- ═══════════════════════════════════════════
        AMBIENT BACKGROUND LAYER
   ════════════════════════════════════════════ -->
